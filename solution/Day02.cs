@@ -11,25 +11,39 @@ class Day02 : IDayCommand
       return (min: long.Parse(numbers[0]), max: long.Parse(numbers[1]));
     }).ToList();
 
-    var sum = 0L;
+    var sumPart01 = 0L;
+    var sumPart02 = 0L;
 
     foreach (var range in ranges)
     {
-      for (var i = range.min; i <= range.max; i++)
+      for (var numberBeingEvaluated = range.min; numberBeingEvaluated <= range.max; numberBeingEvaluated++)
       {
-        var numberAsString = i.ToString();
-        if(numberAsString.Length % 2 != 0) continue;
-        var halfNumberAsString = numberAsString[..(numberAsString.Length / 2)];
-        if(long.Parse(halfNumberAsString + halfNumberAsString) == i)
+        var numberBeingEvaluatedAsString = numberBeingEvaluated.ToString();
+        var hasBeenAccounted = false;
+        for(int patternLength = 1; patternLength <= numberBeingEvaluatedAsString.Length / 2; patternLength++)
         {
-          sum += i;
+          var divisor = (Math.Pow(10, numberBeingEvaluatedAsString.Length) - 1) / (Math.Pow(10, patternLength) - 1);
+          if(numberBeingEvaluated % divisor == 0)
+          {
+            var pattern = numberBeingEvaluated / divisor;
+            if(!hasBeenAccounted)
+            {
+              sumPart02 += numberBeingEvaluated;
+              hasBeenAccounted = true;
+            }
+            if(patternLength == numberBeingEvaluatedAsString.Length / 2 && numberBeingEvaluatedAsString.Length % 2 == 0)
+            {
+              sumPart01 += numberBeingEvaluated;
+            }
+          }
         }
+
       }
     }
 
     return $"""
-               The sum of the ids with error is: {sum} 
-               The new password is: {sum}
+               The sum of the ids with error is: {sumPart01} 
+               The new password is: {sumPart02}
             """;
   }
 }
