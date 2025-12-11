@@ -32,7 +32,7 @@ class Map<T>
         if (considerDiagonals)
         {
           if (lineIndex - 1 >= 0 && columnIndex - 1 >= 0) currentNode.AdjacentNodes.Add(NodeDirection.NORTH_WEST, mapAsArray[lineIndex - 1][columnIndex - 1]);
-          if (lineIndex - 1 >= 0 && columnIndex + 1 < mapAsArray[lineIndex].Count()) currentNode.AdjacentNodes.Add(NodeDirection.SOUTH_EAST, mapAsArray[lineIndex - 1][columnIndex + 1]);
+          if (lineIndex - 1 >= 0 && columnIndex + 1 < mapAsArray[lineIndex].Count()) currentNode.AdjacentNodes.Add(NodeDirection.NORTH_EAST, mapAsArray[lineIndex - 1][columnIndex + 1]);
           if (lineIndex + 1 < map.Count() && columnIndex - 1 >= 0) currentNode.AdjacentNodes.Add(NodeDirection.SOUTH_WEST, mapAsArray[lineIndex + 1][columnIndex - 1]);
           if (lineIndex + 1 < map.Count() && columnIndex + 1 < mapAsArray[lineIndex].Count()) currentNode.AdjacentNodes.Add(NodeDirection.SOUTH_EAST, mapAsArray[lineIndex + 1][columnIndex + 1]);
         }
